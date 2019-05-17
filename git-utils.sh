@@ -45,10 +45,14 @@ function sync_all_repos() {
     baseRepo="${KIECLOUD_HOME}"
   fi
   for repo in "${validRepos[@]}"; do
-    log_info "Rebasing ${repo}" 
-    cd "${baseRepo}/${repo}"
-    git checkout master
-    git pull --rebase upstream master
+    if [ -d "${baseRepo}/${repo}"  ]; then
+      log_info "Rebasing ${repo}" 
+      cd "${baseRepo}/${repo}"
+      git checkout master
+      git pull --rebase upstream master
+    else
+      log_warn "Can't find ${repo} repository in your filesystem, skipping."
+    fi
   done
 }
 
