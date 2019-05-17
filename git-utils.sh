@@ -36,7 +36,7 @@ log_error() {
 }
 
 # Rebase every repo with upstream master
-# {1} base dir where are all kiecloud repos
+# {1} base dir where all kiecloud repos are
 function sync_all_repos() {
   log_info "Trying to sync all Kiecloud projects"
   local validRepos=(cct_module jboss-eap-modules jboss-kie-modules kie-cloud-operator rhdm-7-image rhdm-7-openshift-image rhpam-7-image rhpam-7-openshift-image rhpam-apb)
@@ -50,7 +50,6 @@ function sync_all_repos() {
     git checkout master
     git pull --rebase upstream master
   done
-  cd ${KIECLOUD_HOME}
 }
 
 function main() {
